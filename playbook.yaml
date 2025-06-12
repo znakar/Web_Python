@@ -1,0 +1,18 @@
+---
+- name: Simple-webapp-flask
+  hosts: webservers
+  become: yes
+
+  tasks:
+  - name: Ensure library requests is at the latest version
+    ansible.builtin.pip:
+    name: requests 
+    state: latest
+
+  - name: Install specified python requirements offline from a local directory 
+    ansible.builtin.pip:
+    requirements: ~/SimplePythonGithub/simple-webapp-flask/requirements.txt
+
+  - name: Install app.py usint one of the remote protocols (bzr+,hg+,git+)
+    ansible.builtin.pip:
+    name: git+https://github.com/znakar/Web_Python/app.py
