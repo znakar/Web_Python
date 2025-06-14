@@ -1,18 +1,39 @@
 ---
 - name: Simple-webapp-flask
   hosts: webservers
-  become: yes
+  
 
   tasks:
-  - name: Ensure library requests is at the latest version
-    ansible.builtin.pip:
-    name: requests 
-    state: latest
+  - name: Build Flask image
+    community.docker.docker_image:
+      name: Flask
+      build:
+        path: ~/SimplePythonGithub/simple-webapp-flask/playbook/Flask_DockerFile.dockerfile
+      source: build
 
-  - name: Install specified python requirements offline from a local directory 
-    ansible.builtin.pip:
-    requirements: ~/SimplePythonGithub/simple-webapp-flask/requirements.txt
+  - name: Run Flask container 
+    community.docker.docker_container:
+      name: flask_app
+      image: Flask
+      state: started
+      ports:
+        - "5000:5000"
 
-  - name: Install app.py usint one of the remote protocols (bzr+,hg+,git+)
-    ansible.builtin.pip:
-    name: git+https://github.com/znakar/Web_Python/app.py
+
+
+
+
+
+
+
+  
+
+
+
+
+   # ansible.builtin.pip:
+    #   name: requests 
+    #   state: latest
+  # - name: 
+  #   ansible.builtin.pip:
+  #   requirements: 
