@@ -1,0 +1,58 @@
+#!/bin/bash
+echo "Script is started"
+
+sleep 1
+
+echo "service is started" >> /var/log/python-web.log
+
+echo "Making app file executable..."
+
+# make app file executable
+chmod +x app.py
+
+sleep 1
+
+echo "Changing name..."
+
+# change name
+mv app.py myapp.py
+
+sleep 1
+
+echo "Making directory for myapp"
+
+# make dir for myapp
+mkdir -p /opt/myapp
+
+sleep 1
+
+echo "Moving myapp in /usr/local/bin..."
+
+# move myapp in /usr/local/bin
+sudo mv myapp.py /opt/myapp
+
+sleep 1
+
+echo "Moving myapp.service in /etc/systemd/system..."
+
+# move myapp.service in directory for systemd units
+sudo mv Myapp.service /etc/systemd/system
+
+sleep 1
+
+echo "Creating system-user without home directory..."
+# create no home user
+
+useradd --system --no-create-home --shell /sbin/nologin myapp
+
+echo "Daemon-reload!"
+
+systemctl daemon-reload
+
+sleep 1
+
+echo "Done!"
+
+echo "Status:"
+
+systemctl status Myapp
