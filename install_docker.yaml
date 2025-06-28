@@ -6,11 +6,11 @@
   - name: Install prerequisites
     apt:
       name:
-        - apt-transport-https
-        - ca-certificates
-        - curl
-        - gnupg-agent
-        - software-properties-common
+        - apt-transport-https        # It is designed to provide HTTPS protocol support when working with the APT
+        - ca-certificates            # Package contains ca-certificates to verify the authenticity of HTTPS connections
+        - curl                       # Curl is used in command lines or scripts to transfer data
+        - gnupg-agent                # Daemon, which stores GPG secret keys in memory
+        - software-properties-common # A set of tools that providees an abstraction for managing APT repositories 
       update_cache: yes
   
   - name: add apt-key
@@ -24,9 +24,9 @@
   - name: install docker
     apt:
       name:
-        - docker-ce
-        - docker-ce-cli
-        - containerd.io
+        - docker-ce                   # docker community-edition
+        - docker-ce-cli               # docker community-edition-cli
+        - containerd.io               # daemon providing low-level management of containers
       update_cache: yes
   
   - name: add userpermissions
