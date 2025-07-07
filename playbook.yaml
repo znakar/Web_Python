@@ -1,0 +1,39 @@
+---
+- name: Simple-webapp-flask
+  hosts: webservers
+  
+
+  tasks:
+  - name: Build Flask image
+    community.docker.docker_image:
+      name: Flask
+      build:
+        path: ~/SimplePythonGithub/simple-webapp-flask/playbook/Flask_DockerFile.dockerfile
+      source: build
+
+  - name: Run Flask container 
+    community.docker.docker_container:
+      name: flask_app
+      image: Flask
+      state: started
+      ports:
+        - "5000:5000"
+
+
+
+
+
+
+
+
+  
+
+
+
+
+   # ansible.builtin.pip:
+    #   name: requests 
+    #   state: latest
+  # - name: 
+  #   ansible.builtin.pip:
+  #   requirements: 

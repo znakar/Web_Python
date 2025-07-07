@@ -1,0 +1,13 @@
+[Unit]
+Description=Flask app
+
+[Service]
+ExecStart=/usr/bin/env python3 myapp.py
+WorkingDirectory=/opt/myapp
+User=myapp
+
+
+
+
+[Install]
+WantedBy=multi-user.target
